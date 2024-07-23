@@ -12,11 +12,20 @@ interface InvoiceItem {
 interface InvoiceType {
   items: InvoiceItem[];
   totalPrice: number;
+  selectedItem: InvoiceItem;
 }
 
 const initialState: InvoiceType = {
   items: [],
   totalPrice: 0,
+  selectedItem: {
+    itemId: 0,
+    itemPrice: 0,
+    itemTotalPrice: 0,
+    itemCount: 0,
+    description: "",
+    name: "",
+  },
 };
 
 const invoiceSlice = createSlice({
@@ -25,53 +34,71 @@ const invoiceSlice = createSlice({
   reducers: {
     getAllItems: (state, action) => {
       state.items = action.payload;
-      
-     
     },
-    incrementTotalPrice: (state, action)=>{
+    incrementTotalPrice: (state, action) => {
+      const invoiceItem = state.items.find(
+        (item) => item.itemId === Number(action.payload)
+      );
+      console.log(action.payload, "reducer cart item");
+      if (invoiceItem) {
+        state.totalPrice += invoiceItem.itemPrice;
+        console.log(state, "state");
+      }
+    },
+    changeSelectedItem: (state, action) => {
+      const clickedItem = state.items.find(
+        (item) => item.itemId === Number(action.payload)
+      );
+      console.log(clickedItem, "clicked item");
+      console.log(action.payload, "clicked item");
 
-     const cartItem = state.items.find((item)=> item.itemId === action.payload)
-      console.log(cartItem, 'reducer cart item')
-      if(cartItem){
-        state.totalPrice += cartItem.itemPrice
-      } 
+      if (clickedItem) {
+        state.selectedItem = clickedItem;
+      }
     },
     incrementItemPrice: (state, action) => {
-      const cartItem = state.items.find(
+      const invoiceItem = state.items.find(
         (item) => item.itemId === action.payload
       );
-      if (cartItem) {
+      if (invoiceItem) {
         console.log("Incrementing item price for itemId:", action.payload);
-        console.log("Current item count:", cartItem.itemCount);
+        console.log("Current item count:", invoiceItem.itemCount);
         //increase the quantity of the selected item
-        cartItem.itemCount += 1;
+        invoiceItem.itemCount += 1;
         //increase the total price of the selected item
-console.log('itemTotalPrice:', cartItem.itemTotalPrice);
+        console.log("itemTotalPrice:", invoiceItem.itemTotalPrice);
 
-        cartItem.itemTotalPrice += cartItem.itemPrice;
+        invoiceItem.itemTotalPrice += invoiceItem.itemPrice;
         //increase the total price in the state
-        state.totalPrice += cartItem.itemPrice;
+        state.totalPrice += invoiceItem.itemPrice;
       }
     },
     decrementItemPrice: (state, action) => {
-      const cartItem = state.items.find(
+      const invoiceItem = state.items.find(
         (item) => item.itemId === action.payload
       );
-      if (cartItem) {
+      console.log("decrementing item price for itemId:", action.payload);
+
+      if (invoiceItem) {
         //decrease the quantity of the selected item
-        cartItem.itemCount -= 1;
+        invoiceItem.itemCount -= 1;
         //decrease the total price of the selected item
 
-        cartItem.itemTotalPrice -= cartItem.itemPrice;
+        invoiceItem.itemTotalPrice -= invoiceItem.itemPrice;
         //decrease the total price in the state
-        state.totalPrice -= cartItem.itemPrice;
+        state.totalPrice -= invoiceItem.itemPrice;
       }
     },
   },
 });
 
 //exporting actions
-export const { getAllItems, incrementItemPrice, decrementItemPrice , incrementTotalPrice} =
-  invoiceSlice.actions;
+export const {
+  getAllItems,
+  incrementItemPrice,
+  decrementItemPrice,
+  incrementTotalPrice,
+  changeSelectedItem,
+} = invoiceSlice.actions;
 
 export default invoiceSlice.reducer;

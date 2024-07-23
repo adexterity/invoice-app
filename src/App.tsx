@@ -1,6 +1,8 @@
 import { useEffect } from "react";
+import Button from "@mui/material/Button";
+
 import "./App.css";
-import BasicModal from "./components/addModal";
+import BasicModal from "./components/Modal";
 import { Products } from "./constant/constant";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./state/store";
@@ -8,7 +10,7 @@ import { getAllItems } from "./state/invoice/invoiceSlice";
 
 function App() {
   const stateProduct = useSelector((state: RootState) => state.invoice.items);
-  console.log(stateProduct);
+  console.log(stateProduct, 'stateProduct');
 
   const dispatch = useDispatch();
 
@@ -16,13 +18,34 @@ function App() {
     dispatch(getAllItems(Products));
   }, []);
 
+
+
   return (
     <>
-      <div>
-        <BasicModal />
+      <div className="flex justify-center items-center w-screen h-screen bg-black">
+        <Button variant="contained">
+          <BasicModal />
+        </Button>
       </div>
     </>
   );
 }
 
 export default App;
+
+/* 
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+
+export default function BasicButtons() {
+  return (
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
+  );
+}
+
+*/
