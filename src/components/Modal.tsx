@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import SelectSmall from "./inputComponents/selectComponent";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
 import SpanningTable from "./TableComponent";
@@ -20,33 +19,12 @@ const style = {
   paddingTop: 0,
 };
 
-export default function BasicModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  const handleSave = () => {
-    console.log("item saved");
-  };
-
-  //get the totalPrice from the redux state
-
-  const totalPrice = useSelector(
-    (state: RootState) => state.invoice.totalPrice
-  );
-
-
-
-
+export default function BasicModal({ open, onClose }) {
   return (
     <>
-      <Button onClick={handleOpen} sx={{ color: "white" }}>
-        create Invoice
-      </Button>
       <Modal
         open={open}
-        /*         onClose={handleClose}
-         */ aria-labelledby="modal-modal-title"
+        aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={{
           width: "80%",
@@ -75,7 +53,7 @@ export default function BasicModal() {
             }}
           >
             <Button
-              onClick={handleSave}
+              onClick={onClose}
               sx={{
                 color: "white",
                 backgroundColor: "blue",
@@ -90,7 +68,7 @@ export default function BasicModal() {
               save
             </Button>
             <Button
-              onClick={handleClose}
+              onClick={onClose}
               sx={{
                 color: "black",
                 position: "absolute",
@@ -105,81 +83,80 @@ export default function BasicModal() {
               x
             </Button>
           </Box>
-            <Box
-              sx={{
-                my: 3,
-                marginTop: 0,
-                padding: "20px",
-                backgroundColor: "white",
-              }}
+          <Box
+            sx={{
+              my: 3,
+              marginTop: 0,
+              padding: "20px",
+              backgroundColor: "white",
+            }}
+          >
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{ mb: 3 }}
             >
-              <Typography
-                id="modal-modal-title"
-                variant="h6"
-                component="h2"
-                sx={{ mb: 3 }}
-              >
-                create Invoice
+              create Invoice
+            </Typography>
+            <div>
+              <Typography variant="body2" component="p">
+                Date:
+              </Typography>
+              <Typography variant="body1" component="p">
+                04 Jul, 2024
               </Typography>
               <div>
-                <Typography variant="body2" component="p">
+                <Typography
+                  id="modal-modal-title"
+                  variant="body2"
+                  component="p"
+                >
                   Date:
                 </Typography>
-                <Typography variant="body1" component="p">
-                  04 Jul, 2024
+              </div>
+            </div>
+            <div className="flex justify-start gap-6 my-4">
+              <div className="lg:w-40 ">
+                <Typography variant="body2" component="p">
+                  Biiled from:
                 </Typography>
-                <div>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="body2"
-                    component="p"
-                  >
-                    Date:
-                  </Typography>
-                </div>
+                <Typography variant="body1" component="p">
+                  Hospital test
+                </Typography>
               </div>
-              <div className="flex justify-start gap-6 my-4">
-                <div className="lg:w-40 ">
-                  <Typography variant="body2" component="p">
-                    Biiled from:
-                  </Typography>
-                  <Typography variant="body1" component="p">
-                    Hospital test
-                  </Typography>
-                </div>
-                <div className="lg:w-40 ">
-                  <Typography variant="body2" component="p">
-                    Biiled to:
-                  </Typography>
-                  <Typography variant="body1" component="p">
-                    Emmnual Afolabi
-                  </Typography>
-                </div>
+              <div className="lg:w-40 ">
+                <Typography variant="body2" component="p">
+                  Biiled to:
+                </Typography>
+                <Typography variant="body1" component="p">
+                  Emmnual Afolabi
+                </Typography>
               </div>
+            </div>
 
-              <div className="flex justify-start my-4 lg:gap-6">
-                <div className="lg:w-40 ">
-                  <Typography variant="body2" component="p">
-                    Service Provider
-                  </Typography>
-                  <Typography variant="body1" component="p">
-                    Hospital Test <br /> Lekki, Lagos Nigeria <br /> 08132556677
-                  </Typography>
-                </div>
-                <div className="lg:w-40 ">
-                  <Typography variant="body2" component="p">
-                    Patient Details
-                  </Typography>
-                  <Typography variant="body1" component="p">
-                    Patient Details <br />
-                    Emmanuel Afolabi <br />
-                    08132556677 <br />
-                  </Typography>
-                </div>
+            <div className="flex justify-start my-4 lg:gap-6">
+              <div className="lg:w-40 ">
+                <Typography variant="body2" component="p">
+                  Service Provider
+                </Typography>
+                <Typography variant="body1" component="p">
+                  Hospital Test <br /> Lekki, Lagos Nigeria <br /> 08132556677
+                </Typography>
               </div>
-              
-            </Box>
-        
+              <div className="lg:w-40 ">
+                <Typography variant="body2" component="p">
+                  Patient Details
+                </Typography>
+                <Typography variant="body1" component="p">
+                  Patient Details <br />
+                  Emmanuel Afolabi <br />
+                  08132556677 <br />
+                </Typography>
+              </div>
+            </div>
+          </Box>
+
           <SpanningTable />
         </Box>
       </Modal>

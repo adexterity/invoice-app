@@ -4,7 +4,7 @@ export const Products = [
         name: 'laptop',
         itemPrice: 500 ,
         itemTotalPrice: 500,
-        itemCount: 1,
+        itemCount: 5,
         description: ''
         
     },
@@ -13,7 +13,7 @@ export const Products = [
         name: 'monitor',
         itemPrice: 357.80 ,
         itemTotalPrice: 357.80,
-        itemCount: 1,
+        itemCount: 15,
         description: ''
         
     },
@@ -22,7 +22,7 @@ export const Products = [
         name: 'HeadPhones',
         itemPrice: 20.56 ,
         itemTotalPrice: 20.56,
-        itemCount: 1,
+        itemCount: 10,
         description: ''
         
     },
@@ -31,7 +31,7 @@ export const Products = [
         name: 'Mouse',
         itemPrice: 50 ,
         itemTotalPrice: 50,
-        itemCount: 1,
+        itemCount: 20,
         description: ''
         
     },

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import * as React from "react";
 import Button from "@mui/material/Button";
 
 import "./App.css";
@@ -10,22 +10,33 @@ import { getAllItems } from "./state/invoice/invoiceSlice";
 
 function App() {
   const stateProduct = useSelector((state: RootState) => state.invoice.items);
-  console.log(stateProduct, 'stateProduct');
+  const [open, setOpen] = React.useState<boolean>(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getAllItems(Products));
   }, []);
-
-
 
   return (
     <>
       <div className="flex justify-center items-center w-screen h-screen bg-black">
-        <Button variant="contained">
-          <BasicModal />
+        {/*  <Button variant="contained">
+        create Invoice
+
+        </Button> */}
+
+        <Button
+          variant="contained"
+          onClick={handleOpen}
+          sx={{ color: "white" }}
+        >
+          create Invoice
         </Button>
+        <BasicModal open= {open} onClose={handleClose} />
       </div>
     </>
   );
