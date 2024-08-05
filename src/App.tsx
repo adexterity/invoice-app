@@ -4,13 +4,13 @@ import Button from "@mui/material/Button";
 import "./App.css";
 import BasicModal from "./components/Modal";
 import { Products } from "./constant/constant";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./state/store";
-import { getAllItems } from "./state/invoice/invoiceSlice";
+import { useDispatch} from "react-redux";
+/* import { RootState } from "./state/store";
+ */import { getAllItems } from "./state/invoice/invoiceSlice";
 
 function App() {
-  const stateProduct = useSelector((state: RootState) => state.invoice.items);
-  const [open, setOpen] = React.useState<boolean>(false);
+/*   const stateProduct = useSelector((state: RootState) => state.invoice.items);
+ */  const [open, setOpen] = React.useState<boolean>(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

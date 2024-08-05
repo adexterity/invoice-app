@@ -15,7 +15,13 @@ const style = {
   paddingTop: 0,
 };
 
-export default function BasicModal({ open, onClose }) {
+interface BasicModalProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+
+const BasicModal: React.FC<BasicModalProps> =  ({ open, onClose }) =>{
   return (
     <>
       <Modal
@@ -159,3 +165,7 @@ export default function BasicModal({ open, onClose }) {
     </>
   );
 }
+
+
+
+export default BasicModal;
