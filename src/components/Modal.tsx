@@ -1,12 +1,8 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { useSelector } from "react-redux";
-import { RootState } from "../state/store";
 import SpanningTable from "./TableComponent";
-import { SelectChangeEvent } from "@mui/material";
 
 const style = {
   position: "relative" as "relative",
