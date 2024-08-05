@@ -12,7 +12,7 @@ interface InvoiceItem {
 interface InvoiceType {
   items: InvoiceItem[];
   totalPrice: number;
-  selectedItem: InvoiceItem;
+  selectedItem: InvoiceItem | null;
 }
 
 const initialState: InvoiceType = {
