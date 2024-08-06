@@ -179,7 +179,7 @@ export default function SpanningTable() {
 
     const duration = newSelectedItems[index].duration;
 
-    if (duration > selectedItem?.itemCount) {
+    if (selectedItem && duration > selectedItem?.itemCount) {
       newSelectedItems[index].duration = newSelectedItems[index].duration - 10;
       newSelectedItems[index].amount -= 500;
     }
